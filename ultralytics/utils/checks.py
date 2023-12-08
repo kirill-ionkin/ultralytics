@@ -55,8 +55,7 @@ def parse_requirements(file_path=ROOT.parent / 'requirements.txt', package=''):
         line = line.strip()
         if line and not line.startswith('#'):
             line = line.split('#')[0].strip()  # ignore inline comments
-            match = re.match(r'([a-zA-Z0-9-_]+)\s*([<>!=~]+.*)?', line)
-            if match:
+            if match := re.match(r'([a-zA-Z0-9-_]+)\s*([<>!=~]+.*)?', line):
                 requirements.append(SimpleNamespace(name=match[1], specifier=match[2].strip() if match[2] else ''))
 
     return requirements
@@ -349,8 +348,7 @@ def check_requirements(requirements=ROOT.parent / 'requirements.txt', exclude=()
         except (AssertionError, metadata.PackageNotFoundError):
             pkgs.append(r)
 
-    s = ' '.join(f'"{x}"' for x in pkgs)  # console string
-    if s:
+    if s := ' '.join(f'"{x}"' for x in pkgs):
         if install and AUTOINSTALL:  # check environment variable
             n = len(pkgs)  # number of packages updates
             LOGGER.info(f"{prefix} Ultralytics requirement{'s' * (n > 1)} {pkgs} not found, attempting AutoUpdate...")
