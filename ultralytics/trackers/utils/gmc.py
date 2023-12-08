@@ -44,7 +44,7 @@ class GMC:
         super().__init__()
 
         self.method = method
-        self.downscale = max(1, int(downscale))
+        self.downscale = max(1, downscale)
 
         if self.method == 'orb':
             self.detector = cv2.FastFeatureDetector_create(20)
@@ -70,7 +70,7 @@ class GMC:
                                        useHarrisDetector=False,
                                        k=0.04)
 
-        elif self.method in ['none', 'None', None]:
+        elif self.method in {'none', 'None', None}:
             self.method = None
         else:
             raise ValueError(f'Error: Unknown GMC method:{method}')

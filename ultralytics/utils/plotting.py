@@ -341,7 +341,11 @@ class Annotator:
 
     def plot_angle_and_count_and_stage(self, angle_text, count_text, stage_text, center_kpt, line_thickness=2):
         """Plot the pose angle, count value and step stage."""
-        angle_text, count_text, stage_text = f' {angle_text:.2f}', 'Steps : ' + f'{count_text}', f' {stage_text}'
+        angle_text, count_text, stage_text = (
+            f' {angle_text:.2f}',
+            f'Steps : {count_text}',
+            f' {stage_text}',
+        )
         font_scale = 0.6 + (line_thickness / 10.0)
 
         # Draw angle
